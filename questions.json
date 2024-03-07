@@ -1,0 +1,28 @@
+{
+    "Q1": {
+      "question": "Explain the difference between supervised and unsupervised learning.",
+      "model_answer": "Supervised learning uses labeled data for training, while unsupervised learning works with unlabeled data to find hidden patterns.",
+      "hint_keywords": ["supervised learning", "unsupervised learning", "labeled data", "hidden patterns"]
+    },
+    "Q2": {
+      "question": "What is overfitting in machine learning?",
+      "model_answer": "Overfitting occurs when a model learns to memorize the training data instead of generalizing, leading to poor performance on new data.",
+      "hint_keywords": ["overfitting", "memorize", "generalizing", "poor performance"]
+    },
+    "Q3": {
+      "question": "What is the purpose of cross-validation in model evaluation?",
+      "model_answer": "Cross-validation helps assess a model's performance by splitting the data into multiple subsets for training and testing, reducing the risk of overfitting.",
+      "hint_keywords": ["cross-validation", "model evaluation", "multiple subsets", "overfitting"]
+    },
+    "Q4": {
+      "question": "Explain the concept of feature engineering in machine learning.",
+      "model_answer": "Feature engineering involves selecting, transforming, or creating new features from the raw data to improve a model's performance and interpretability.",
+      "hint_keywords": ["feature engineering", "transforming", "improve performance", "interpretability"]
+    },
+    "Q5": {
+      "question": "What is regularization in machine learning, and why is it used?",
+      "model_answer": "Regularization adds a penalty term to the model's cost function to prevent overfitting by discouraging overly complex models.",
+      "hint_keywords": ["regularization", "penalty term", "overfitting", "complex models"]
+    }
+  }
+  
