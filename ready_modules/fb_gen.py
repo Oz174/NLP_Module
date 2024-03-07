@@ -12,7 +12,7 @@ class FeedbackGenerator:
         for _, item in scores.items():
             if item < 0.5:
                 mappings.append("low")
-            elif item < 0.75:
+            elif item < 0.80:
                 mappings.append("medium")
             else:
                 mappings.append("high")
