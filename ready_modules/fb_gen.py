@@ -10,9 +10,9 @@ class FeedbackGenerator:
         mappings = []
         areas = list(scores.keys())
         for _, item in scores.items():
-            if item < 0.5:
+            if item <= 0.5:
                 mappings.append("low")
-            elif item < 0.80:
+            elif item <= 0.8:
                 mappings.append("medium")
             else:
                 mappings.append("high")
@@ -50,7 +50,7 @@ class FeedbackGenerator:
         scores.append(scores[0])
         scores_dict.append(scores_dict[0])
 
-        fig = plt.figure(figsize=(3, 5))
+        fig = plt.figure(figsize=(5, 5))
         ax = fig.add_subplot(polar=True)
         # basic plot
         ax.plot(scores_dict_angles, scores, 'o--',

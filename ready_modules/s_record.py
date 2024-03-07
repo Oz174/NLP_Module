@@ -26,7 +26,7 @@ class SoundRecorder:
                            if f.endswith('.wav')]
         except AssertionError:
             print("Path does not exist")
-            print(path_to_answers)
+            print(os.listdir(path_to_answers))
             return answers
         with ThreadPoolExecutor() as executor:
             futures = {executor.submit(
@@ -38,8 +38,3 @@ class SoundRecorder:
                 if sentence is not None:
                     answers[os.path.basename(audio_file)[-6:-4]] = sentence
         return answers
-
-
-# Example usage:
-answers = SoundRecorder.get_answers("audio samples/interviewee_answer")
-print(answers)

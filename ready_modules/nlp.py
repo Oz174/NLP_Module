@@ -4,6 +4,7 @@ from ans_eval import AnswerEvaluator
 from s_record import SoundRecorder
 from fb_gen import FeedbackGenerator
 import json
+import sys
 import numpy as np
 
 
@@ -68,3 +69,13 @@ class NLP_MODULE:
             json.dump(self.results, file, indent=4)
         del self.results
         return
+
+
+if __name__ == "__main__":
+    # take arguments from command line
+    # nlp_class_module = NLP_MODULE(sys.argv[0], sys.argv[1])
+    nlp_class_module = NLP_MODULE(
+        "audio samples/interviewee_answer", "questions.json")
+    nlp_class_module.prepare_data()
+    nlp_class_module.generate_results()
+    nlp_class_module.export_results_to_json()
