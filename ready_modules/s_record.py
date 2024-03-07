@@ -20,4 +20,7 @@ class SoundRecorder:
                 answers[audio[-6:-4]] = sentence
             except Exception as e:
                 print('Error:  ' + str(e))
+        del sentence
+        del answers_files
+        del audio_ans
         return answers

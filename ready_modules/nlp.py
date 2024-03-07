@@ -59,7 +59,12 @@ class NLP_MODULE:
         print(self.results)
         FeedbackGenerator.generate_feedback_message(self.results)
         FeedbackGenerator.spider_graph_generator(self.results)
+        del self.questions_w_model_answers
+        del self.interviewee_answers
+        return
 
     def export_results_to_json(self):
         with open("results.json", "w") as file:
             json.dump(self.results, file, indent=4)
+        del self.results
+        return

@@ -30,6 +30,10 @@ class AnswerEvaluator:
         total_words = len(document)
         for word, count in word_count.items():
             tf[word] = count / total_words
+        del word_count
+        del total_words
+        del word
+        del count
         return tf
 
     def calculate_idf(self, documents):
@@ -40,6 +44,9 @@ class AnswerEvaluator:
             (total_documents + k) /
             (1 + sum(1 for doc in documents if word in doc)))
             for word in all_words}
+        del k
+        del total_documents
+        del all_words
         return idf
 
     def calculate_tfidf(self, tf, idf):
@@ -67,6 +74,9 @@ class AnswerEvaluator:
                 score += 1
         if keywords_lower:
             score /= len(keywords_lower)
+        del student_answer_lower
+        del keywords_lower
+        del keyword
         return score
 
     def evaluate(self, student_answer, keywords):
@@ -88,4 +98,14 @@ class AnswerEvaluator:
                 (similarity_score + keywords_score)/2
         except ZeroDivisionError:
             final_score = 0
+        del tokens1
+        del tokens2
+        del documents
+        del tf1
+        del tf2
+        del idf
+        del tfidf1
+        del tfidf2
+        del similarity_score
+        del keywords_score
         return 1 if final_score > 1 else final_score
