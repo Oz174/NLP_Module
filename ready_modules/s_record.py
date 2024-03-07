@@ -19,8 +19,15 @@ class SoundRecorder:
     @staticmethod
     def get_answers(path_to_answers):
         answers = {}
-        audio_files = [os.path.join(path_to_answers, f) for f in os.listdir(
-            path_to_answers) if f.endswith('.wav')]
+        try:
+            assert os.path.exists(path_to_answers)
+            audio_files = [os.path.join(path_to_answers, f)
+                           for f in os.listdir(path_to_answers)
+                           if f.endswith('.wav')]
+        except AssertionError:
+            print("Path does not exist")
+            print(path_to_answers)
+            return answers
         with ThreadPoolExecutor() as executor:
             futures = {executor.submit(
                 SoundRecorder.process_audio, audio_file): audio_file
