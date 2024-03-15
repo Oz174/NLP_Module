@@ -1,15 +1,24 @@
+""" NLP Module for Interview Evaluation"""
 # pylint: disable=line-too-long
 import os
+import json
+import numpy as np
 from ans_eval import AnswerEvaluator
 from s_record import SoundRecorder
 from fb_gen import FeedbackGenerator
-import json
-import sys
-import numpy as np
 
 
 class NLP_MODULE:
+    """
+    This class is used to evaluate the interviewee's answers.
+    """
+
     def __init__(self, path_to_interviewee_answers: str, model_answers_json: str):
+        """
+        This method is used to initialize the class.
+        :param path_to_interviewee_answers: str
+        :param model_answers_json: str
+        """
         self.path_to_interviewee_answers = path_to_interviewee_answers
         self.model_answers_json = model_answers_json
         self.questions_w_model_answers = {}
@@ -17,12 +26,16 @@ class NLP_MODULE:
         self.results = {}
 
     def prepare_data(self):
+        """
+        This method is used to prepare data for evaluation.
+        :return: dict, dict
+        """
         # Takes too long , need to be optimized by threading
         if self.model_answers_json is None or not self.model_answers_json.endswith("json"):
             raise TypeError(
                 "Incorrect name or not json format")
 
-        with open(self.model_answers_json, "r") as file:
+        with open(self.model_answers_json, "r", encoding='utf-8') as file:
             questions_w_model_answers = json.load(file)
 
         interviewee_answers = [f for f in os.listdir(
@@ -31,7 +44,9 @@ class NLP_MODULE:
         assert len(questions_w_model_answers) == len(
             interviewee_answers), "Length Mismatch between audio files and answers"
         # Assert 2
+
         def ans_no(x): return x[:-4]
+
         assert list(questions_w_model_answers.keys()) == list(
             map(ans_no, interviewee_answers)), "Keys Mismatch among questions' numbers"
         del ans_no
@@ -42,6 +57,10 @@ class NLP_MODULE:
         return self.questions_w_model_answers, self.interviewee_answers
 
     def generate_results(self):
+        """
+        This method is used to generate results.
+        :return: None
+        """
         results = {}
         for ques_no, answer in self.questions_w_model_answers.items():
             model_answer = answer['model_answer']
@@ -62,13 +81,15 @@ class NLP_MODULE:
         FeedbackGenerator.spider_graph_generator(self.results)
         del self.questions_w_model_answers
         del self.interviewee_answers
-        return
 
     def export_results_to_json(self):
+        """
+        This method is used to export results to json file.
+        :return: None
+        """
         with open("results.json", "w") as file:
             json.dump(self.results, file, indent=4)
         del self.results
-        return
 
 
 if __name__ == "__main__":

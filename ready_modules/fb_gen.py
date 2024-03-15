@@ -1,11 +1,23 @@
+# pylint disable=line-too-long
+""" This module is used to generate feedback messages and spider graph. """
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
 
 class FeedbackGenerator:
+    """
+    This class is used to generate feedback messages and spider graph.
+    """
     @staticmethod
-    def generate_feedback_message(scores, fb_folder="feedback samples/"):
+    def generate_feedback_message(scores: dict,
+                                  fb_folder: str = "feedback samples/"):
+        """
+        This method is used to generate feedback message.
+        :param scores: dict
+        :param fb_folder: str
+        :return: None
+        """
         feedback_message = "Here is your feedback:\n"
         mappings = []
         areas = list(scores.keys())
@@ -21,19 +33,23 @@ class FeedbackGenerator:
             # shall be removed on higher integration
             try:
                 path = fb_folder + area + "/" + category + ".txt"
-                with open(path, "r") as file:
+                with open(path, "r", encoding='utf-8') as file:
                     messages = file.readlines()
                     # random choice of one message from the file
                     feedback_message += messages[np.random.randint(
                         0, len(messages))] + "\n"
-            except FileNotFoundError:
-                raise FileNotFoundError("Feedback file not found")
+            except FileNotFoundError as exc:
+                raise FileNotFoundError("Feedback file not found") from exc
 
         print(feedback_message)
-        return
 
     @staticmethod
     def spider_graph_generator(scores):
+        """
+        This method is used to generate spider graph.
+        :param scores: dict
+        :return: None
+        """
         # split the dict into 2 lists
         scores_dict = scores
         scores = list(scores_dict.values())

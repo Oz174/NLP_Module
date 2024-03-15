@@ -1,11 +1,20 @@
+""" This module is used to record sound and process it to text. """
 import os
-import speech_recognition as sr
 from concurrent.futures import ThreadPoolExecutor
+import speech_recognition as sr
 
 
 class SoundRecorder:
+    """
+    This class is used to record sound and process it to text.
+    """
     @staticmethod
-    def process_audio(audio_file):
+    def process_audio(audio_file: str) -> str | None:
+        """
+        This method is used to process audio file to text.
+        :param audio_file: str
+        :return: str | None
+        """
         r = sr.Recognizer()
         try:
             with sr.AudioFile(audio_file) as source:
@@ -17,7 +26,12 @@ class SoundRecorder:
             return None
 
     @staticmethod
-    def get_answers(path_to_answers):
+    def get_answers(path_to_answers: str) -> dict[str, str] | dict[str, None]:
+        """
+        This method is used to get answers from audio files.
+        :param path_to_answers: str
+        :return: dict
+        """
         answers = {}
         try:
             assert os.path.exists(path_to_answers)
