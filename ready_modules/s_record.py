@@ -20,6 +20,7 @@ class SoundRecorder:
             with sr.AudioFile(audio_file) as source:
                 audio_ans = r.record(source)
             sentence = r.recognize_google(audio_ans)
+            # print("You said : ", sentence)
             return sentence
         except Exception as e:
             print(f'Error processing {audio_file}: {e}')
